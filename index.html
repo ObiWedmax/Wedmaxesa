@@ -43,27 +43,62 @@
       overflow-x: hidden;
     }
 
-    /* Tło z oryginalnego projektu */
+    /* Tło statyczne (gradient) */
     .bg-animated {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1;
+      z-index: -2;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .bg-pattern {
+    /* --- NOWA KONSTRUKCJA TŁA (METODA NA ZAKŁADKĘ) --- */
+    
+    /* Kontener trzymający całość w miejscu */
+    .wave-container {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-      background-size: cover;
-      animation: wave 20s linear infinite;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       z-index: -1;
     }
 
-    @keyframes wave {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    /* Pasek, który się przesuwa. Ma szerokość 200% ekranu + mały zapas */
+    .wave-mover {
+      display: flex;
+      width: 200%; 
+      height: 100%;
+      animation: waveMove 20s linear infinite;
+      /* Optymalizacja wydajności */
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
     }
+
+    /* Pojedynczy segment fali */
+    .wave-segment {
+      width: 50%; /* Każdy zajmuje dokładnie szerokość ekranu */
+      height: 100%;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+      background-size: 100% 100%; /* Rozciągnij SVG na cały segment */
+      background-repeat: no-repeat;
+    }
+
+    /* KLUCZ DO SUKCESU: Drugi segment wjeżdża 2px na pierwszy */
+    .wave-segment:nth-child(2) {
+      margin-left: -16px; /* To likwiduje przerwę na 100% */
+    }
+
+    @keyframes waveMove {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        /* Przesuwamy o 50% szerokości kontenera (czyli o 1 ekran) */
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+    /* ---------------------------------------------------- */
 
     /* Header uproszczony */
     header {
@@ -79,7 +114,7 @@
     .logo {
       font-size: 1.75rem;
       font-weight: 800;
-      color: white; /* Biały na tle gradientu */
+      color: white;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
@@ -259,7 +294,13 @@
 </head>
 <body>
   <div class="bg-animated"></div>
-  <div class="bg-pattern"></div>
+  
+  <div class="wave-container">
+    <div class="wave-mover">
+      <div class="wave-segment"></div>
+      <div class="wave-segment"></div>
+    </div>
+  </div>
 
   <header>
     <div class="logo">WEDMAX</div>
@@ -272,7 +313,7 @@
     <div class="construction-card">
       <div class="status-badge">
         <span class="pulsing-dot"></span>
-        Strona w budowie
+        Strona w przebudowie
       </div>
       
       <h1>Strona w budowie</h1>
@@ -340,7 +381,3 @@
   </script>
 </body>
 </html>
-
-
-
-
