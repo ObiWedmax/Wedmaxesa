@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="WEDMAX - Profesjonalne bramy segmentowe. Montaż, serwis i gwarancja. Ponad 500 zadowolonych klientów w całej Polsce.">
-  <title>WEDMAX - Profesjonalne Bramy Segmentowe | Montaż i Serwis</title>
+  <meta name="description" content="WEDMAX - Profesjonalne bramy segmentowe. Strona w przebudowie. Zapraszamy do kontaktu telefonicznego.">
+  <title>WEDMAX - Strona w budowie | Bramy Segmentowe</title>
+  <link rel="icon" href="letter-w_11873313.png" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
@@ -13,12 +14,10 @@
       --primary-dark: #1e40af;
       --secondary: #0ea5e9;
       --accent: #f59e0b;
-      --success: #10b981;
       --bg-light: #ffffff;
       --bg-gray: #f8fafc;
       --text-dark: #0f172a;
       --text-gray: #64748b;
-      --border: #e2e8f0;
       --shadow: rgba(0, 0, 0, 0.1);
     }
     
@@ -27,15 +26,10 @@
       --bg-gray: #1e293b;
       --text-dark: #f1f5f9;
       --text-gray: #94a3b8;
-      --border: #334155;
       --shadow: rgba(0, 0, 0, 0.3);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -43,142 +37,142 @@
       color: var(--text-dark);
       line-height: 1.6;
       transition: background 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
     }
 
-    /* Skip to main content for accessibility */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--primary);
-      color: white;
-      padding: 8px;
-      text-decoration: none;
-      z-index: 100;
-    }
-
-    .skip-link:focus {
-      top: 0;
-    }
-
-    /* Animated Background */
+    /* Tło z oryginalnego projektu */
     .bg-animated {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      will-change: opacity;
     }
 
-    body.dark .bg-animated {
-      opacity: 0.03;
-    }
-
-    /* Navigation */
-    header {
+    .bg-pattern {
       position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 1px 3px var(--shadow);
-      transition: all 0.3s ease;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+      background-size: cover;
+      animation: wave 20s linear infinite;
+      z-index: -1;
     }
 
-    body.dark header {
-      background: rgba(15, 23, 42, 0.95);
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    header.scrolled {
-      padding: 0.5rem 0;
-      box-shadow: 0 4px 6px var(--shadow);
-    }
-
-    nav {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
+    /* Header uproszczony */
+    header {
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .logo {
       font-size: 1.75rem;
       font-weight: 800;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: white; /* Biały na tle gradientu */
       letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .nav-links {
+    /* Główna karta */
+    main {
+      flex: 1;
       display: flex;
-      gap: 2.5rem;
       align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.3s;
+    .construction-card {
+      background: var(--bg-light);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.8s ease;
       position: relative;
+      overflow: hidden;
     }
 
-    .nav-links a:focus {
-      outline: 2px solid var(--primary);
-      outline-offset: 4px;
-      border-radius: 4px;
-    }
-
-    .nav-links a::after {
+    .construction-card::before {
       content: '';
       position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary);
-      transition: width 0.3s;
+      top: 0; left: 0; right: 0; height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
     }
 
-    .nav-cta {
-      display: flex;
-      gap: 1rem;
+    p.subtitle {
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
       align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pulsing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+    }
+
+    /* Sekcja kontaktowa */
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
     }
 
     .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s;
       border: none;
       cursor: pointer;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn:focus {
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
+      font-size: 1rem;
     }
 
     .btn-primary {
@@ -190,981 +184,151 @@
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
     }
 
-    .theme-toggle {
-      background: var(--bg-gray);
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--border);
       color: var(--text-dark);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      border: 2px solid #e2e8f0;
+    }
+    
+    body.dark .btn-outline {
+        border-color: #334155;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    /* Lista usług */
+    .services-list {
       display: flex;
-      align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 1px solid var(--border);
-    }
-
-    .theme-toggle:hover {
-      transform: rotate(20deg) scale(1.1);
-    }
-
-    .theme-toggle:focus {
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-dark);
-      padding: 0.5rem;
-    }
-
-    .mobile-menu-btn:focus {
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
-      border-radius: 4px;
-    }
-
-    /* Mobile Menu Overlay */
-    .mobile-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: var(--bg-light);
-      z-index: 999;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      padding: 2rem;
-    }
-
-    .mobile-nav.active {
-      transform: translateX(0);
-    }
-
-    .mobile-nav-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-
-    .mobile-nav-close {
-      background: none;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: var(--text-dark);
-      padding: 0.5rem;
-    }
-
-    .mobile-nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .mobile-nav-links a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-size: 1.5rem;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    .mobile-nav-links a:hover {
-      color: var(--primary);
-    }
-
-    /* Hero Section */
-    .hero {
-      margin-top: 80px;
-      min-height: 85vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-      background-size: cover;
-      animation: wave 20s linear infinite;
-      will-change: transform;
-    }
-
-    @keyframes wave {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .hero-content {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .hero-text h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      color: white;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.8s ease;
-    }
-
-    .hero-text p {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 2rem;
-      animation: fadeInUp 0.8s ease 0.2s backwards;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
-      animation: fadeInUp 0.8s ease 0.4s backwards;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    body.dark .services-list {
+        border-top: 1px solid rgba(255,255,255,0.1);
     }
 
-    .btn-light {
-      background: white;
-      color: var(--primary);
-    }
-
-    .btn-light:hover {
-      background: var(--bg-gray);
-    }
-
-    .hero-image {
-      animation: fadeInRight 1s ease;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Stats Section */
-    .stats {
-      background: var(--bg-gray);
-      padding: 4rem 2rem;
-      transform: translateY(-60px);
-      position: relative;
-      z-index: 2;
-    }
-
-    .stats-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      background: var(--bg-light);
-      border-radius: 20px;
-      padding: 3rem;
-      box-shadow: 0 10px 40px var(--shadow);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 3rem;
-    }
-
-    .stat {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       color: var(--text-gray);
+      font-size: 0.9rem;
       font-weight: 500;
     }
 
-    /* Section Styles */
-    section {
-      padding: 5rem 2rem;
-      max-width: 1280px;
-      margin: 0 auto;
+    .check-icon {
+      color: #10b981;
     }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-badge {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: rgba(37, 99, 235, 0.1);
-      color: var(--primary);
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 2.5rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: var(--text-dark);
-    }
-
-    .section-subtitle {
-      font-size: 1.125rem;
-      color: var(--text-gray);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Features Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: var(--bg-light);
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-
-    .feature-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px var(--shadow);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .feature-icon svg {
-      width: 28px;
-      height: 28px;
-      fill: white;
-    }
-
-    .feature-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-
-    .feature-desc {
-      color: var(--text-gray);
-      line-height: 1.6;
-    }
-
-    /* Gallery */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .gallery-item {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
+    /* Theme Toggle */
+    .theme-toggle {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover { transform: rotate(20deg) scale(1.1); background: rgba(255,255,255,0.3); }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      padding: 1.5rem;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-    }
-
-    .gallery-overlay h3 {
-      color: white;
-      font-size: 1.125rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .gallery-overlay p {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.875rem;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 20px;
-      padding: 4rem 2rem;
-      text-align: center;
-      color: white;
-      margin: 5rem 2rem;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      margin-bottom: 1rem;
-    }
-
-    .cta-section p {
-      font-size: 1.125rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Contact Info Only Layout */
-    .contact-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .contact-item {
-      background: var(--bg-gray);
-      padding: 2rem;
-      border-radius: 16px;
-      display: flex;
-      gap: 1.5rem;
-      align-items: start;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    
-    .contact-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px var(--shadow);
-    }
-
-    .contact-icon {
-      width: 50px;
-      height: 50px;
-      background: rgba(37, 99, 235, 0.1);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-
-    .contact-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--primary);
-    }
-
-    .contact-details h3 {
-      font-size: 1.125rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .contact-details p {
-      color: var(--text-gray);
-    }
-
-    /* Footer */
-    footer {
-      background: var(--text-dark);
-      color: white;
-      padding: 4rem 2rem 2rem;
-    }
-
-    body.dark footer {
-      background: #020617;
-    }
-
-    .footer-content {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-about h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .footer-about p {
-      color: rgba(255,255,255,0.7);
-      line-height: 1.8;
-    }
-
-    .footer-links h4 {
-      margin-bottom: 1rem;
-      font-size: 1.125rem;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.75rem;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-links a:hover {
-      color: white;
-    }
-
-    .footer-links a:focus {
-      outline: 2px solid white;
-      outline-offset: 2px;
-      border-radius: 2px;
-    }
-
-    .footer-bottom {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      color: rgba(255,255,255,0.5);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      
-      .hero-image {
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links,
-      .nav-cta .btn {
-        display: none;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .hero {
-        min-height: 70vh;
-      }
-
-      section {
-        padding: 3rem 1rem;
-      }
-
-      .stats {
-        padding: 3rem 1rem;
-      }
-
-      .stats-container {
-        padding: 2rem;
-        gap: 2rem;
-      }
-
-      .cta-section {
-        margin: 3rem 1rem;
-        padding: 3rem 1.5rem;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease-out;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+    @media (max-width: 600px) {
+      .construction-card { padding: 2rem 1.5rem; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <a href="#main" class="skip-link">Przejdź do głównej treści</a>
   <div class="bg-animated"></div>
+  <div class="bg-pattern"></div>
 
-  <header id="header">
-    <nav>
-      <div class="logo">WEDMAX</div>
-      <div class="nav-links">
-        <a href="#features">Oferta</a>
-        <a href="#gallery">Realizacje</a>
-        <a href="#contact">Kontakt</a>
-      </div>
-      <div class="nav-cta">
-        <a href="tel:+48123456789" class="btn btn-primary" aria-label="Zadzwoń teraz pod numer +48 123 456 789">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="currentColor"/>
-          </svg>
-          Zadzwoń teraz
-        </a>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Przełącz motyw">
-          <span aria-hidden="true">🌙</span>
-        </button>
-      </div>
-      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Otwórz menu" aria-expanded="false">
-        <span aria-hidden="true">☰</span>
-      </button>
-    </nav>
+  <header>
+    <div class="logo">WEDMAX</div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Przełącz motyw">
+      <span aria-hidden="true">🌙</span>
+    </button>
   </header>
 
-  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu nawigacji">
-    <div class="mobile-nav-header">
-      <div class="logo">WEDMAX</div>
-      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Zamknij menu">
-        <span aria-hidden="true">✕</span>
-      </button>
-    </div>
-    <nav class="mobile-nav-links">
-      <a href="#features">Oferta</a>
-      <a href="#gallery">Realizacje</a>
-      <a href="#contact">Kontakt</a>
-      <a href="tel:+48123456789" class="btn btn-primary" style="margin-top: 1rem;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="currentColor"/>
-        </svg>
-        Zadzwoń teraz
-      </a>
-    </nav>
-  </div>
+  <main>
+    <div class="construction-card">
+      <div class="status-badge">
+        <span class="pulsing-dot"></span>
+        Strona w przebudowie
+      </div>
+      
+      <h1>Strona w budowie</h1>
+      <p class="subtitle">
+        Nasza nowa strona jest w trakcie tworzenia, ale my cały czas pracujemy! 
+        Zamów bramę segmentową lub umów serwis już dzisiaj.
+      </p>
 
-  <main id="main">
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Bramy Segmentowe Najwyższej Jakości</h1>
-          <p>Profesjonalny montaż, bezpieczeństwo i elegancja dla Twojego domu. Ponad 500 zadowolonych klientów w całej Polsce.</p>
-          <div class="hero-buttons">
-            <a href="#contact" class="btn btn-light">Bezpłatna wycena</a>
-            <a href="#gallery" class="btn btn-primary">Zobacz realizacje</a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Nowoczesna brama segmentowa zamontowana w garażu jednorodzinnego domu" loading="eager">
-        </div>
-      </div>
-    </section>
-
-    <div class="stats">
-      <div class="stats-container">
-        <div class="stat">
-          <div class="stat-number" aria-label="Ponad 500">500+</div>
-          <div class="stat-label">Zadowolonych Klientów</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">12</div>
-          <div class="stat-label">Lat Doświadczenia</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">98%</div>
-          <div class="stat-label">Rekomendacji</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Serwis Awaryjny</div>
-        </div>
-      </div>
-    </div>
-
-    <section id="features" class="reveal">
-      <div class="section-header">
-        <div class="section-badge">Dlaczego My</div>
-        <h2 class="section-title">Nasza Oferta</h2>
-        <p class="section-subtitle">Kompleksowe rozwiązania dla Twojego garażu - od projektu po montaż i serwis</p>
-      </div>
-      <div class="features-grid">
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Profesjonalny Montaż</h3>
-          <p class="feature-desc">Doświadczony zespół zapewnia montaż zgodny z najwyższymi standardami bezpieczeństwa.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Gwarancja Jakości</h3>
-          <p class="feature-desc">5 lat gwarancji na materiały i wykonanie. Serwis gwarancyjny i pogwarancyjny.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Napędy Automatyczne</h3>
-          <p class="feature-desc">Nowoczesne systemy automatyki z pilotem i możliwością sterowania telefonem.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Indywidualny Design</h3>
-          <p class="feature-desc">Szeroki wybór kolorów, wzorów i wykończeń dopasowanych do Twojego domu.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Maksymalne Bezpieczeństwo</h3>
-          <p class="feature-desc">Certyfikowane systemy zabezpieczeń przeciwwłamaniowych klasy RC2.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="12" y1="1" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="feature-title">Przystępne Ceny</h3>
-          <p class="feature-desc">Konkurencyjne ceny bez ukrytych kosztów. Możliwość płatności ratalnej.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="gallery" class="reveal">
-      <div class="section-header">
-        <div class="section-badge">Portfolio</div>
-        <h2 class="section-title">Nasze Realizacje</h2>
-        <p class="section-subtitle">Zobacz efekty naszej pracy - bramy, które łączą funkcjonalność z estetyką</p>
-      </div>
-      <div class="gallery-grid">
-        <article class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Brama segmentowa w kolorze antracytowym zamontowana w domu jednorodzinnym" loading="lazy">
-          <div class="gallery-overlay">
-            <h3>Dom Jednorodzinny</h3>
-            <p>Warszawa, 2024</p>
-          </div>
-        </article>
-        <article class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=600&q=80" alt="Elegancka brama segmentowa w rezydencji" loading="lazy">
-          <div class="gallery-overlay">
-            <h3>Rezydencja</h3>
-            <p>Kraków, 2024</p>
-          </div>
-        </article>
-        <article class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" alt="Podwójna brama segmentowa w garażu dwustanowiskowym" loading="lazy">
-          <div class="gallery-overlay">
-            <h3>Garaż Dwustanowiskowy</h3>
-            <p>Wrocław, 2024</p>
-          </div>
-        </article>
-        <article class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80" alt="Przemysłowa brama segmentowa w hali magazynowej" loading="lazy">
-          <div class="gallery-overlay">
-            <h3>Hala Magazynowa</h3>
-            <p>Poznań, 2024</p>
-          </div>
-        </article>
-        <article class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=600&q=80" alt="Brama segmentowa w centrum logistycznym" loading="lazy">
-          <div class="gallery-overlay">
-            <h3>Centrum Logistyczne</h3>
-            <p>Gdańsk, 2024</p>
-          </div>
-        </article>
-        <article class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" alt="Nowoczesna brama segmentowa w domu szeregowym" loading="lazy">
-          <div class="gallery-overlay">
-            <h3>Dom Szeregowy</h3>
-            <p>Łódź, 2024</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <div class="cta-section reveal">
-      <h2>Gotowy na Nową Bramę?</h2>
-      <p>Skontaktuj się z nami i otrzymaj bezpłatną wycenę w 24h</p>
-      <div class="cta-buttons">
-        <a href="mailto:kontakt@wedmax.pl" class="btn btn-light" aria-label="Napisz do nas email">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Napisz e-mail
-        </a>
-        <a href="tel:+48123456789" class="btn" style="background: rgba(255,255,255,0.2); color: white;" aria-label="Zadzwoń pod numer +48 123 456 789">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="currentColor"/>
+      <div class="contact-grid">
+        <a href="tel:+48123456789" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
-          +48 123 456 789
+          Zadzwoń: 790 541 620
+        </a>
+        <a href="mailto:emilw1@op.pl" class="btn btn-outline">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          Napisz e-mail: emilw1@op.pl
         </a>
       </div>
-    </div>
 
-    <section id="contact" class="reveal">
-      <div class="section-header">
-        <div class="section-badge">Kontakt</div>
-        <h2 class="section-title">Skontaktuj Się z Nami</h2>
-        <p class="section-subtitle">Odpowiemy na wszystkie Twoje pytania</p>
-      </div>
-      <div class="contact-container">
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Jan Kowalski</h3>
-              <p>Właściciel / Kierownik Projektu</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Telefon</h3>
-              <p><a href="tel:+48123456789" style="color: inherit; text-decoration: none;">+48 123 456 789</a></p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">Pn-Pt: 8:00-18:00, Sob: 9:00-14:00</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Email</h3>
-              <p><a href="mailto:kontakt@wedmax.pl" style="color: inherit; text-decoration: none;">kontakt@wedmax.pl</a></p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">Odpowiedź w ciągu 24h</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h3>Adres</h3>
-              <p>ul. Przykładowa 123</p>
-              <p>00-001 Warszawa</p>
-            </div>
-          </div>
+      <p style="font-size: 0.9rem; color: var(--text-gray);">
+        ⚡ Bezpłatna wycena w 24h • Dojazd do klienta
+      </p>
+
+      <div class="services-list">
+        <div class="service-item">
+          <span class="check-icon">✓</span> Bramy Segmentowe
+        </div>
+        <div class="service-item">
+          <span class="check-icon">✓</span> Automatyka
+        </div>
+        <div class="service-item">
+          <span class="check-icon">✓</span> Serwis
+        </div>
+        <div class="service-item">
+          <span class="check-icon">✓</span> 500+ Klientów
         </div>
       </div>
-    </section>
+    </div>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-about">
-        <h3>WEDMAX</h3>
-        <p>Specjalizujemy się w sprzedaży i montażu bram segmentowych najwyższej jakości. Od ponad 12 lat zapewniamy bezpieczeństwo i komfort setkom polskich rodzin.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Firma</h4>
-        <ul>
-          <li><a href="#features">O nas</a></li>
-          <li><a href="#gallery">Realizacje</a></li>
-          <li><a href="#contact">Kontakt</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Oferta</h4>
-        <ul>
-          <li><a href="#features">Bramy segmentowe</a></li>
-          <li><a href="#features">Napędy automatyczne</a></li>
-          <li><a href="#features">Serwis</a></li>
-          <li><a href="#features">Gwarancja</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Prawne</h4>
-        <ul>
-          <li><a href="#" aria-label="Polityka prywatności">Polityka prywatności</a></li>
-          <li><a href="#" aria-label="Regulamin">Regulamin</a></li>
-          <li><a href="#" aria-label="Informacje RODO">RODO</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 WEDMAX. Wszystkie prawa zastrzeżone.</p>
-    </div>
-  </footer>
-
   <script>
-    // Theme Toggle with system preference
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileNav = document.getElementById('mobile-nav');
-    const mobileNavClose = document.getElementById('mobile-nav-close');
 
     // Initialize theme
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        body.classList.add('dark');
-        themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
-      } else {
-        themeToggle.innerHTML = '<span aria-hidden="true">🌙</span>';
-      }
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      body.classList.add('dark');
+      themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
     }
 
     themeToggle.addEventListener('click', () => {
@@ -1172,103 +336,6 @@
       const isDark = body.classList.contains('dark');
       themeToggle.innerHTML = isDark ? '<span aria-hidden="true">☀️</span>' : '<span aria-hidden="true">🌙</span>';
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-
-    // Mobile Menu
-    function openMobileMenu() {
-      mobileNav.classList.add('active');
-      mobileMenuBtn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMobileMenu() {
-      mobileNav.classList.remove('active');
-      mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    mobileMenuBtn.addEventListener('click', openMobileMenu);
-    mobileNavClose.addEventListener('click', closeMobileMenu);
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-
-    // Close mobile menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-        closeMobileMenu();
-      }
-    });
-
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const revealOnScroll = () => {
-      reveals.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (elementTop < windowHeight - 100) {
-          element.classList.add('active');
-        }
-      });
-    };
-
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
-
-    // Header scroll effect
-    const header = document.getElementById('header');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      
-      if (currentScroll > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-      
-      lastScroll = currentScroll;
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          const headerOffset = 80;
-          const elementPosition = target.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Initialize
-    initTheme();
-    revealOnScroll();
-
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        if (e.matches) {
-          body.classList.add('dark');
-          themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
-        } else {
-          body.classList.remove('dark');
-          themeToggle.innerHTML = '<span aria-hidden="true">🌙</span>';
-        }
-      }
     });
   </script>
 </body>
