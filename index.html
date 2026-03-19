@@ -3,18 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="WEDMAX - Profesjonalne bramy segmentowe. Strona w budowie. Zapraszamy do kontaktu telefonicznego.">
+  <meta name="description" content="WEDMAX - Profesjonalne bramy segmentowe. Montaż, serwis i gwarancja. Ponad 500 zadowolonych klientów w całej Polsce.">
   <meta property="og:image" content="https://wedmax.pl/nowylink.jpg">
-  <title>WEDMAX - Strona w budowie | Bramy Segmentowe</title>
-  <link rel="icon" href="letter-w_9155388.png" type="image/png">
-  <meta property="og:title" content="WEDMAX - Profesjonalne Bramy Segmentowe">
-  
-  <meta property="og:description" content="Montaż, serwis i automatyka. Zobacz ofertę i zamów bezpłatną wycenę już dziś!">
-  
-  <meta property="og:image" content="https://wedmax.pl/og-image.jpg">
-  
-  <meta property="og:url" content="https://wedmax.pl">
+  <meta property="og:title" content="WEDMAX - Profesjonalne Bramy Segmentowe | Montaż i Serwis">
+  <meta property="og:description" content="WEDMAX - Profesjonalne bramy segmentowe. Montaż, serwis i gwarancja. Ponad 500 zadowolonych klientów w całej Polsce.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wedmax.pl">
+  <title>WEDMAX - Profesjonalne Bramy Segmentowe | Montaż i Serwis</title>
+  <link rel="icon" href="letter-w_9155388.png" type="image/png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
@@ -23,10 +19,12 @@
       --primary-dark: #1e40af;
       --secondary: #0ea5e9;
       --accent: #f59e0b;
+      --success: #10b981;
       --bg-light: #ffffff;
       --bg-gray: #f8fafc;
       --text-dark: #0f172a;
       --text-gray: #64748b;
+      --border: #e2e8f0;
       --shadow: rgba(0, 0, 0, 0.1);
     }
     
@@ -35,188 +33,172 @@
       --bg-gray: #1e293b;
       --text-dark: #f1f5f9;
       --text-gray: #94a3b8;
+      --border: #334155;
       --shadow: rgba(0, 0, 0, 0.3);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg-light);
-      color: var(--text-dark);
+      background: transparent;
+      color: #ffffff;
       line-height: 1.6;
       transition: background 0.3s ease, color 0.3s ease;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       overflow-x: hidden;
     }
 
-    /* Tło statyczne (gradient) */
-    .bg-animated {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -2;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Skip to main content for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 100;
     }
 
-    /* --- NOWA KONSTRUKCJA TŁA (METODA NA ZAKŁADKĘ) --- */
-    
-    /* Kontener trzymający całość w miejscu */
-    .wave-container {
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Animated Background (Now full screen) */
+    .bg-animated {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       z-index: -1;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      opacity: 1;
+      transition: background 0.3s ease;
     }
 
-    /* Pasek, który się przesuwa. Ma szerokość 200% ekranu + mały zapas */
-    .wave-mover {
-      display: flex;
-      width: 200%; 
+    /* Płynna, pełnoekranowa fala */
+    .bg-animated::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200vw;
       height: 100%;
-      animation: waveMove 20s linear infinite;
-      /* Optymalizacja wydajności */
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="none"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+      background-repeat: repeat-x;
+      background-size: 100vw 100%;
+      animation: wave 20s linear infinite;
       will-change: transform;
-      transform: translate3d(0, 0, 0);
     }
 
-    /* Pojedynczy segment fali */
-    .wave-segment {
-      width: 50%; /* Każdy zajmuje dokładnie szerokość ekranu */
-      height: 100%;
-      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-      background-size: 100% 100%; /* Rozciągnij SVG na cały segment */
-      background-repeat: no-repeat;
+    body.dark .bg-animated {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     }
 
-    /* KLUCZ DO SUKCESU: Drugi segment wjeżdża 2px na pierwszy */
-    .wave-segment:nth-child(2) {
-      margin-left: -16px; /* To likwiduje przerwę na 100% */
-    }
-
-    @keyframes waveMove {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-      100% {
-        /* Przesuwamy o 50% szerokości kontenera (czyli o 1 ekran) */
-        transform: translate3d(-50%, 0, 0);
-      }
-    }
-    /* ---------------------------------------------------- */
-
-    /* Header uproszczony */
+    /* Navigation */
     header {
-      padding: 1.5rem 2rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 3px var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    body.dark header {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    header.scrolled {
+      padding: 0.5rem 0;
+      box-shadow: 0 4px 6px var(--shadow);
+    }
+
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1280px;
-      margin: 0 auto;
-      width: 100%;
     }
 
     .logo {
       font-size: 1.75rem;
       font-weight: 800;
-      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       letter-spacing: -0.5px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    /* Główna karta */
-    main {
-      flex: 1;
+    .nav-links {
       display: flex;
+      gap: 2.5rem;
       align-items: center;
-      justify-content: center;
-      padding: 2rem;
     }
 
-    .construction-card {
-      background: var(--bg-light);
-      padding: 3rem 2rem;
-      border-radius: 24px;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: fadeInUp 0.8s ease;
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
       position: relative;
-      overflow: hidden;
     }
 
-    .construction-card::before {
+    .nav-links a:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .nav-links a::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; height: 6px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
     }
 
-    h1 {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: var(--text-dark);
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
-    p.subtitle {
-      color: var(--text-gray);
-      font-size: 1.1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(37, 99, 235, 0.1);
-      color: var(--primary);
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.875rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .pulsing-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--primary);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
-    }
-
-    /* Sekcja kontaktowa */
-    .contact-grid {
-      display: grid;
+    .nav-cta {
+      display: flex;
       gap: 1rem;
-      margin-bottom: 2.5rem;
+      align-items: center;
     }
 
     .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 1rem 1.5rem;
-      border-radius: 12px;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s;
       border: none;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
     }
 
     .btn-primary {
@@ -228,157 +210,1018 @@
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
     }
 
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--border);
+    .theme-toggle {
+      background: var(--bg-gray);
       color: var(--text-dark);
-      border: 2px solid #e2e8f0;
-    }
-    
-    body.dark .btn-outline {
-        border-color: #334155;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: rgba(37, 99, 235, 0.05);
-    }
-
-    /* Lista usług */
-    .services-list {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(0,0,0,0.1);
-    }
-    
-    body.dark .services-list {
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .service-item {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--text-gray);
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .check-icon {
-      color: #10b981;
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      color: white;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      justify-content: center;
       cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.3);
       transition: all 0.3s;
+      border: 1px solid var(--border);
     }
-    .theme-toggle:hover { transform: rotate(20deg) scale(1.1); background: rgba(255,255,255,0.3); }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg) scale(1.1);
+    }
+
+    .theme-toggle:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-dark);
+      padding: 0.5rem;
+    }
+
+    .mobile-menu-btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--bg-light);
+      z-index: 999;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .mobile-nav-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-dark);
+      padding: 0.5rem;
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .mobile-nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 80px;
+      min-height: 85vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .hero-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero-text p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease 0.4s backwards;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-light:hover {
+      background: var(--bg-gray);
+    }
+
+    .hero-image {
+      animation: fadeInRight 1s ease;
+      position: relative; /* Necessary to stack slides */
+      aspect-ratio: 4/3; /* Maintain a consistent aspect ratio for the container */
+      overflow: hidden; /* Hide anything that overflows the container */
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Important to keep image ratio on aspect-ratio container */
+      opacity: 0; /* Initially invisible */
+      transition: opacity 1s ease-in-out; /* Smooth transition */
+      z-index: 1; /* Initial z-index */
+    }
+
+    .hero-slide.active {
+      opacity: 1; /* Visible when active */
+      z-index: 2; /* Bring active slide to front */
+    }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 600px) {
-      .construction-card { padding: 2rem 1.5rem; }
-      .contact-grid { grid-template-columns: 1fr; }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Stats Section */
+    .stats {
+      background: transparent;
+      padding: 4rem 2rem;
+      transform: translateY(-60px);
+      position: relative;
+      z-index: 3;
+    }
+
+    .stats-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-number {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-gray);
+      font-weight: 500;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: #f1f5f9;
+      color: var(--text-dark);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark .feature-card {
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-desc {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(250px, 350px)); 
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img,
+    .gallery-item:hover video { transform: scale(1.1); }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+    .gallery-overlay h3 { color: white; font-size: 1.125rem; margin-bottom: 0.25rem; }
+    .gallery-overlay p { color: rgba(255,255,255,0.8); font-size: 0.875rem; }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+      margin: 5rem 2rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .cta-section h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 1rem; }
+    .cta-section p { font-size: 1.125rem; margin-bottom: 2rem; opacity: 0.9; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Contact Info Only Layout */
+    .contact-container { max-width: 900px; margin: 0 auto; }
+    .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+    .contact-item {
+      background: #f1f5f9;
+      color: var(--text-dark);
+      padding: 2rem;
+      border-radius: 16px;
+      display: flex;
+      gap: 1.5rem;
+      align-items: start;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark .contact-item {
+      background: var(--bg-light);
+    }
+    
+    .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(37, 99, 235, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg { width: 24px; height: 24px; fill: var(--primary); }
+    .contact-details h3 { font-size: 1.125rem; margin-bottom: 0.25rem; }
+    .contact-details p { color: var(--text-gray); }
+
+    /* Footer */
+    footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 4rem 2rem 2rem;
+      margin-top: 4rem;
+    }
+
+    body.dark footer { background: #020617; }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-about h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    .footer-about p { color: rgba(255,255,255,0.7); line-height: 1.8; }
+    .footer-links h4 { margin-bottom: 1rem; font-size: 1.125rem; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.75rem; }
+    .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: white; }
+    .footer-links a:focus { outline: 2px solid white; outline-offset: 2px; border-radius: 2px; }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-image { max-width: 500px; margin: 0 auto; }
+      .hero-buttons { justify-content: center; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+      
+      .gallery-grid { 
+        grid-template-columns: repeat(2, minmax(250px, 350px)); 
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta .btn { display: none; }
+      .mobile-menu-btn { display: block; }
+      .hero { min-height: 70vh; }
+      section, .stats { padding: 3rem 1rem; }
+      .stats-container { padding: 2rem; gap: 2rem; }
+      .cta-section { margin: 3rem 1rem; padding: 3rem 1.5rem; }
+      .footer-content { grid-template-columns: 1fr; }
+
+      .gallery-grid { 
+        grid-template-columns: 1fr; 
+        max-width: 400px; 
+        margin: 0 auto; 
+      }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Przejdź do głównej treści</a>
   <div class="bg-animated"></div>
-  
-  <div class="wave-container">
-    <div class="wave-mover">
-      <div class="wave-segment"></div>
-      <div class="wave-segment"></div>
-    </div>
-  </div>
 
-  <header>
-    <div class="logo">WEDMAX</div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Przełącz motyw">
-      <span aria-hidden="true">🌙</span>
-    </button>
+  <header id="header">
+    <nav>
+      <div class="logo">WEDMAX</div>
+      <div class="nav-links">
+        <a href="#features">Oferta</a>
+        <a href="#gallery">Realizacje</a>
+        <a href="#contact">Kontakt</a>
+      </div>
+      <div class="nav-cta">
+        <a href="tel:+48790541620" class="btn btn-primary" aria-label="Zadzwoń teraz pod numer 790 541 620">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="currentColor"/>
+          </svg>
+          Zadzwoń teraz
+        </a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Przełącz motyw">
+          <span aria-hidden="true">🌙</span>
+        </button>
+      </div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Otwórz menu" aria-expanded="false">
+        <span aria-hidden="true">☰</span>
+      </button>
+    </nav>
   </header>
 
-  <main>
-    <div class="construction-card">
-      <div class="status-badge">
-        <span class="pulsing-dot"></span>
-        Strona w budowie
+  <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu nawigacji">
+    <div class="mobile-nav-header">
+      <div class="logo">WEDMAX</div>
+      <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Zamknij menu">
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="#features">Oferta</a>
+      <a href="#gallery">Realizacje</a>
+      <a href="#contact">Kontakt</a>
+      <a href="tel:+48790541620" class="btn btn-primary" style="margin-top: 1rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="currentColor"/>
+        </svg>
+        Zadzwoń teraz
+      </a>
+    </nav>
+  </div>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Bramy Segmentowe Najwyższej Jakości</h1>
+          <p>Profesjonalny montaż, bezpieczeństwo i elegancja dla Twojego domu. Ponad 500 zadowolonych klientów w całej Polsce.</p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-light">Bezpłatna wycena</a>
+            <a href="#gallery" class="btn btn-primary">Zobacz realizacje</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="673a67c3-534f-4ef7-aa3b-622e6ddc552c.jpg" alt="Brama przemysłowa w oświetleniu nocnym" class="hero-slide active" loading="eager">
+          <img src="147a3efe-afac-406f-b259-bf5e0472732e.jpg" alt="Biały garaż wolnostojący z ciemną bramą segmentową i drzwiami bocznymi" class="hero-slide" loading="lazy">          
+          <img src="7970de23-2ab2-44de-a91d-23bf72bdb0b4.jpg" alt="Nowoczesna czarna brama garażowa z oknami w białym garażu" class="hero-slide" loading="lazy">
+          <img src="a005f796-6eee-47e4-a7c4-bc9871aacb10.jpg" alt="Hala przemysłowa z dwiema dużymi bramami" class="hero-slide" loading="lazy">
+          <img src="c7ffd1a3-7c96-4f5c-a8cb-02a047a85815.jpg" alt="Wnętrze nowoczesnej hali magazynowej z bramami" class="hero-slide" loading="lazy">
+          <img src="d2d131af-ea9e-442a-b835-526cccc1faf5.jpg" alt="Ciemna, estetyczna brama garażowa od wewnątrz" class="hero-slide" loading="lazy">
+          <img src="c873f753-09c0-4102-a16d-f37e6a44a68c.jpg" alt="Brama przemysłowa wielkogabarytowa w akcji" class="hero-slide" loading="lazy">
+          
+          <img src="04770616-dfcd-4b49-9e5c-7f69a29d7e52.jpg" alt="Dwie brązowe bramy z oknami w żółtym budynku" class="hero-slide" loading="lazy">
+          <img src="e5c1cdda-652d-435e-aedd-7874bb371d92.jpg" alt="Wielkogabarytowa brama przemysłowa z wieloma przeszkleniami" class="hero-slide" loading="lazy">
+        </div>
       </div>
-      
-      <h1>Strona w budowie</h1>
-      <p class="subtitle">
-        Nasza nowa strona jest w trakcie tworzenia, ale my cały czas pracujemy! 
-        Zamów bramę segmentową lub umów serwis już dzisiaj.
-      </p>
+    </section>
 
-      <div class="contact-grid"> 
-        <a href="tel:+48790541620" class="btn btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          Zadzwoń: 790 541 620
-        </a>
-        <a href="mailto:emilw1@op.pl" class="btn btn-outline">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          Napisz e-mail: emilw1@op.pl
-        </a>
-      </div>
-
-      <p style="font-size: 0.9rem; color: var(--text-gray);">
-        ⚡ Bezpłatna wycena w 24h • Dojazd do klienta
-      </p>
-
-      <div class="services-list">
-        <div class="service-item">
-          <span class="check-icon">✓</span> Bramy Segmentowe
+    <div class="stats">
+      <div class="stats-container">
+        <div class="stat">
+          <div class="stat-number" aria-label="Ponad 500">500+</div>
+          <div class="stat-label">Zadowolonych Klientów</div>
         </div>
-        <div class="service-item">
-          <span class="check-icon">✓</span> Automatyka
+        <div class="stat">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Lat Doświadczenia</div>
         </div>
-        <div class="service-item">
-          <span class="check-icon">✓</span> Serwis
+        <div class="stat">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Rekomendacji</div>
         </div>
-        <div class="service-item">
-          <span class="check-icon">✓</span> 500+ Klientów
+        <div class="stat">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Serwis Awaryjny</div>
         </div>
       </div>
     </div>
+
+    <section id="features" class="reveal">
+      <div class="section-header">
+        <div class="section-badge">Dlaczego My</div>
+        <h2 class="section-title">Nasza Oferta</h2>
+        <p class="section-subtitle">Kompleksowe rozwiązania dla Twojego garażu - od projektu po montaż i serwis</p>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Profesjonalny Montaż</h3>
+          <p class="feature-desc">Doświadczony zespół zapewnia montaż zgodny z najwyższymi standardami bezpieczeństwa.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Gwarancja Jakości</h3>
+          <p class="feature-desc">5 lat gwarancji na materiały i wykonanie. Serwis gwarancyjny i pogwarancyjny.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Napędy Automatyczne</h3>
+          <p class="feature-desc">Nowoczesne systemy automatyki z pilotem i możliwością sterowania telefonem.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Indywidualny Design</h3>
+          <p class="feature-desc">Szeroki wybór kolorów, wzorów i wykończeń dopasowanych do Twojego domu.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Maksymalne Bezpieczeństwo</h3>
+          <p class="feature-desc">Certyfikowane systemy zabezpieczeń przeciwwłamaniowych klasy RC2.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="1" x2="12" y2="23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Przystępne Ceny</h3>
+          <p class="feature-desc">Konkurencyjne ceny bez ukrytych kosztów. Możliwość płatności ratalnej.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="reveal">
+      <div class="section-header">
+        <div class="section-badge">Portfolio</div>
+        <h2 class="section-title">Nasze Realizacje</h2>
+        <p class="section-subtitle">Zobacz efekty naszej pracy - bramy, które łączą funkcjonalność z estetyką</p>
+      </div>
+      <div class="gallery-grid">
+      
+        <article class="gallery-item">
+          <video autoplay loop muted playsinline>
+            <source src="fa4606bc-5787-43e9-a4b0-9f4d298b9733.mp4" type="video/mp4">
+            Twoja przeglądarka nie obsługuje wideo.
+          </video>
+          <div class="gallery-overlay">
+            <h3>Brama Przemysłowa w Akcji</h3>
+            <p>Płynna praca wielkogabarytowa</p>
+          </div>
+        </article>
+        
+        <article class="gallery-item">
+          <video autoplay loop muted playsinline>
+            <source src="3e5d1689-9780-4b1c-b379-e91d420457a0.mp4" type="video/mp4">
+            Twoja przeglądarka nie obsługuje wideo.
+          </video>
+          <div class="gallery-overlay">
+            <h3>Nowoczesna Hala</h3>
+            <p>Zamykanie z drzwiami serwisowymi</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="04770616-dfcd-4b49-9e5c-7f69a29d7e52.jpg" alt="Dwie brązowe bramy z oknami w jasnym budynku" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Budynek Firmowy</h3>
+            <p>Bramy z przeszkleniami</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="e5c1cdda-652d-435e-aedd-7874bb371d92.jpg" alt="Wielkogabarytowa brama przemysłowa z oknami od wewnątrz" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Hala Przemysłowa</h3>
+            <p>Maksymalne doświetlenie wnętrza</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="8d65435b-df63-4a51-863f-6ef7aa4f48ee.jpg" alt="Brama segmentowa drewnopodobna w domu jednorodzinnym" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Dom Jednorodzinny</h3>
+            <p>Wykończenie drewnopodobne</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="384aec41-8de6-4689-98bc-55665c2c04f3.jpg" alt="Brązowa brama segmentowa z drzwiami bocznymi" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Garaż Wolnostojący</h3>
+            <p>Brama z drzwiami technicznymi</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="f3a8afa7-9e96-463e-a628-22d45868a585.jpg" alt="Dwie ciemne bramy segmentowe w garażu dwustanowiskowym" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Garaż Dwustanowiskowy</h3>
+            <p>Niezależne systemy automatyki</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="c873f753-09c0-4102-a16d-f37e6a44a68c.jpg" alt="Przemysłowa brama segmentowa o dużych gabarytach" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Hala Magazynowa</h3>
+            <p>Rozwiązania wielkogabarytowe</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="c7ffd1a3-7c96-4f5c-a8cb-02a047a85815.jpg" alt="Szereg nowoczesnych bram garażowych w inwestycji deweloperskiej" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Zabudowa Szeregowa</h3>
+            <p>Realizacje dla deweloperów</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="d2d131af-ea9e-442a-b835-526cccc1faf5.jpg" alt="Bardzo szeroka brama segmentowa antracytowa" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Szeroki Wjazd</h3>
+            <p>Wymiary niestandardowe</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="28a0101d-cf33-49be-9bcf-235dc8aa6eaa.jpg" alt="Przemysłowe bramy segmentowe z przeszkleniami" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Obiekt Przemysłowy</h3>
+            <p>Sekcje z przeszkleniami</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="7e949cec-cce3-48f5-9960-0be1ad4a3cb0.jpg" alt="Mechanizm bramy segmentowej od wewnątrz" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Solidny Mechanizm</h3>
+            <p>Niezawodna automatyka i prowadnice</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="40bd28ea-a300-43f7-9e99-f47b8d32011f.jpg" alt="Wysoka brama przemysłowa z drzwiami przejściowymi" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Drzwi Serwisowe</h3>
+            <p>Wbudowane w panel bramy</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="4cb65426-6b0a-4ac8-b4b1-93a2dd9c7609.jpg" alt="Montaż bramy w nowo budowanym domu" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Nowe Inwestycje</h3>
+            <p>Montaż na etapie budowy</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="1710035d-876e-4592-bc3a-53b231e039ce.jpg" alt="Nowoczesna szara brama z gładkim przetłoczeniem" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Nowoczesny Design</h3>
+            <p>Gładkie przetłoczenia</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="66cfdd9c-3d65-473f-bed4-78214c08ecbe.jpg" alt="Dopasowane drzwi boczne do garażu" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Kompleksowa Stolarka</h3>
+            <p>Drzwi techniczne pod wymiar</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="3c9e4cdb-07b3-453c-a569-4f4ed26e51cd.jpg" alt="Wolnostojący garaż z szarą bramą i bocznymi drzwiami" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Kontrastowe Połączenie</h3>
+            <p>Garaż wolnostojący</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="4b471864-ba18-4825-a584-11150d5b4fa0.jpg" alt="Drewnopodobna brama w oświetleniu nocnym" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Nocna Ekspozycja</h3>
+            <p>Klasyczne drewno</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="4bba4e0e-8749-4a45-baf0-b6b50196caeb.jpg" alt="Wnętrze hali przemysłowej z dużymi bramami" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Hala od Wewnątrz</h3>
+            <p>Przemysłowe przeszklenia</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="1a143284-67f4-409e-8ae0-e11e9d83a2b6.jpg" alt="Wysoka biała brama przemysłowa z drzwiami i oknami" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Wysokie Składowanie</h3>
+            <p>Zintegrowane drzwi i okna</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="1ad9281a-4059-410d-9f67-a978cd241f85.jpg" alt="Dwie olbrzymie bramy wewnątrz warsztatu lub hali" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Wielki Format</h3>
+            <p>Wielostanowiskowa hala</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="2bb21077-36b9-4b35-b3bc-d00943647f6e.jpg" alt="Szeroka brama drewnopodobna w jasnym garażu wolnostojącym" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Szeroki Wyjazd</h3>
+            <p>Elegancja i wygoda</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="0adff23b-1b20-48e6-bc07-8e125f09f06c.jpg" alt="Duża szara brama z wieloma przeszkleniami i drzwiami" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Maksymalne Doświetlenie</h3>
+            <p>Rozwiązania dla warsztatów</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="01a2be9d-49bc-4d2e-a5ca-079600fc0904.jpg" alt="Szara brama z drzwiami serwisowymi i dwoma okienkami" loading="lazy">
+          <div class="gallery-overlay">
+            <h3>Zintegrowane Drzwi</h3>
+            <p>Funkcjonalne wejście</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="cta-section reveal">
+      <h2>Gotowy na Nową Bramę?</h2>
+      <p>Skontaktuj się z nami i otrzymaj bezpłatną wycenę w 24h</p>
+      <div class="cta-buttons">
+        <a href="mailto:emilw1@op.pl" class="btn btn-light" aria-label="Napisz do nas email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Napisz e-mail
+        </a>
+        <a href="tel:+48790541620" class="btn" style="background: rgba(255,255,255,0.2); color: white;" aria-label="Zadzwoń pod numer 790 541 620">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="currentColor"/>
+          </svg>
+          790 541 620
+        </a>
+      </div>
+    </div>
+
+    <section id="contact" class="reveal">
+      <div class="section-header">
+        <div class="section-badge">Kontakt</div>
+        <h2 class="section-title">Skontaktuj Się z Nami</h2>
+        <p class="section-subtitle">Odpowiemy na wszystkie Twoje pytania</p>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="contact-details">
+              <h3>Emil Wójcik</h3>
+              <p>Właściciel / Kierownik Projektu</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="contact-details">
+              <h3>Telefon</h3>
+              <p><a href="tel:+48790541620" style="color: inherit; text-decoration: none;">790 541 620</a></p>
+              <p style="font-size: 0.875rem; margin-top: 0.5rem;">Pn-Pt: 8:00-18:00, Sob: 9:00-14:00</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="contact-details">
+              <h3>Email</h3>
+              <p><a href="mailto:emilw1@op.pl" style="color: inherit; text-decoration: none;">emilw1@op.pl</a></p>
+              <p style="font-size: 0.875rem; margin-top: 0.5rem;">Odpowiedź w ciągu 24h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <footer>
+    <div class="footer-content">
+      <div class="footer-about">
+        <h3>WEDMAX</h3>
+        <p>Specjalizujemy się w sprzedaży i montażu bram segmentowych najwyższej jakości. Od ponad 12 lat zapewniamy bezpieczeństwo i komfort setkom polskich rodzin.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Firma</h4>
+        <ul>
+          <li><a href="#features">O nas</a></li>
+          <li><a href="#gallery">Realizacje</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Oferta</h4>
+        <ul>
+          <li><a href="#features">Bramy segmentowe</a></li>
+          <li><a href="#features">Napędy automatyczne</a></li>
+          <li><a href="#features">Serwis</a></li>
+          <li><a href="#features">Gwarancja</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Prawne</h4>
+        <ul>
+          <li><a href="#" aria-label="Polityka prywatności">Polityka prywatności</a></li>
+          <li><a href="#" aria-label="Regulamin">Regulamin</a></li>
+          <li><a href="#" aria-label="Informacje RODO">RODO</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 WEDMAX. Wszystkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
   <script>
+    // Theme Toggle with system preference
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileNavClose = document.getElementById('mobile-nav-close');
 
     // Initialize theme
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      body.classList.add('dark');
-      themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        body.classList.add('dark');
+        themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
+      } else {
+        themeToggle.innerHTML = '<span aria-hidden="true">🌙</span>';
+      }
     }
 
     themeToggle.addEventListener('click', () => {
@@ -387,11 +1230,124 @@
       themeToggle.innerHTML = isDark ? '<span aria-hidden="true">☀️</span>' : '<span aria-hidden="true">🌙</span>';
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
+
+    // Mobile Menu
+    function openMobileMenu() {
+      mobileNav.classList.add('active');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileNav.classList.remove('active');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    mobileNavClose.addEventListener('click', closeMobileMenu);
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      reveals.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight - 100) {
+          element.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Header scroll effect
+    const header = document.getElementById('header');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Hero Slide Show
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    if (heroSlides.length > 0) {
+      let currentHeroSlideIndex = 0;
+      const slideChangeInterval = 4000; // Zmieniaj zdjęcie co 4 sekundy
+
+      function changeHeroSlide() {
+        // Usuń klasę 'active' z obecnego slajdu
+        heroSlides[currentHeroSlideIndex].classList.remove('active');
+
+        // Zwiększ indeks, wracając do 0, jeśli przekroczy liczbę slajdów
+        currentHeroSlideIndex = (currentHeroSlideIndex + 1) % heroSlides.length;
+
+        // Dodaj klasę 'active' do nowego slajdu
+        heroSlides[currentHeroSlideIndex].classList.add('active');
+      }
+
+      // Uruchom pokaz slajdów
+      setInterval(changeHeroSlide, slideChangeInterval);
+    }
+
+    // Initialize
+    initTheme();
+    revealOnScroll();
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          body.classList.add('dark');
+          themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
+        } else {
+          body.classList.remove('dark');
+          themeToggle.innerHTML = '<span aria-hidden="true">🌙</span>';
+        }
+      }
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
