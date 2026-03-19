@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
   <meta name="theme-color" id="theme-color-meta" content="#ffffff">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
   <meta name="description" content="WEDMAX - Profesjonalne bramy segmentowe. Montaż, serwis i gwarancja. Ponad 500 zadowolonych klientów w całej Polsce.">
   <meta property="og:image" content="https://wedmax.pl/nowylink.jpg">
   <meta property="og:title" content="WEDMAX - Profesjonalne Bramy Segmentowe | Montaż i Serwis">
@@ -12,6 +17,7 @@
   <meta property="og:url" content="https://wedmax.pl">
   <title>WEDMAX - Profesjonalne Bramy Segmentowe | Montaż i Serwis</title>
   <link rel="icon" href="letter-w_9155388.png" type="image/png">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
     
@@ -44,9 +50,14 @@
       box-sizing: border-box;
     }
 
+    /* Wymuszenie koloru tła dla samej przeglądarki (eliminuje białe paski) */
     html {
       background-color: #ffffff;
       transition: background-color 0.3s ease;
+    }
+    
+    html.dark-html {
+      background-color: #0f172a !important;
     }
 
     body {
@@ -372,11 +383,11 @@
 
     .hero-image {
       animation: fadeInRight 1s ease;
-      position: relative;
-      width: 100%; /* NAPRAWA: Gwarantuje prawidłowe wyświetlanie na iOS / mobile */
-      min-height: 250px; /* Zapasowa wysokość dla starszych przeglądarek */
-      aspect-ratio: 4/3;
-      overflow: hidden;
+      position: relative; 
+      width: 100%;
+      min-height: 300px;
+      aspect-ratio: 4/3; 
+      overflow: hidden; 
       border-radius: 20px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
@@ -387,15 +398,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; 
       opacity: 0; 
-      transition: opacity 1s ease-in-out;
-      z-index: 1;
+      transition: opacity 1s ease-in-out; 
+      z-index: 1; 
     }
 
     .hero-slide.active {
       opacity: 1; 
-      z-index: 2;
+      z-index: 2; 
     }
 
     @keyframes fadeInUp {
@@ -730,6 +741,20 @@
       }
     }
   </style>
+  
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+        if (isDark) {
+          document.documentElement.classList.add('dark-html');
+          document.getElementById('theme-color-meta').setAttribute('content', '#0f172a');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <a href="#main" class="skip-link">Przejdź do głównej treści</a>
@@ -799,7 +824,6 @@
           <img src="c7ffd1a3-7c96-4f5c-a8cb-02a047a85815.jpg" alt="Wnętrze nowoczesnej hali magazynowej z bramami" class="hero-slide" loading="lazy">
           <img src="d2d131af-ea9e-442a-b835-526cccc1faf5.jpg" alt="Ciemna, estetyczna brama garażowa od wewnątrz" class="hero-slide" loading="lazy">
           <img src="c873f753-09c0-4102-a16d-f37e6a44a68c.jpg" alt="Brama przemysłowa wielkogabarytowa w akcji" class="hero-slide" loading="lazy">
-          
           <img src="04770616-dfcd-4b49-9e5c-7f69a29d7e52.jpg" alt="Dwie brązowe bramy z oknami w żółtym budynku" class="hero-slide" loading="lazy">
           <img src="e5c1cdda-652d-435e-aedd-7874bb371d92.jpg" alt="Wielkogabarytowa brama przemysłowa z wieloma przeszkleniami" class="hero-slide" loading="lazy">
         </div>
@@ -1207,11 +1231,28 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 WEDMAX. Wszystkie prawa zastrzeżone.</p>
+      <p>© <script>document.write(new Date().getFullYear())</script> WEDMAX. Wszystkie prawa zastrzeżone.</p>
     </div>
   </footer>
 
   <script>
+    // Aktualizacja koloru paska systemowego na urządzeniach mobilnych
+    function updateThemeColor(isDark) {
+      const metaThemeColor = document.getElementById('theme-color-meta');
+      const color = isDark ? '#0f172a' : '#ffffff';
+      
+      if (isDark) {
+        document.documentElement.classList.add('dark-html');
+      } else {
+        document.documentElement.classList.remove('dark-html');
+        document.documentElement.style.backgroundColor = color;
+      }
+      
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', color);
+      }
+    }
+
     // Theme Toggle with system preference
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
@@ -1219,29 +1260,19 @@
     const mobileNav = document.getElementById('mobile-nav');
     const mobileNavClose = document.getElementById('mobile-nav-close');
 
-    // Kolor paska Safari
-    function updateThemeColor(isDark) {
-      const metaThemeColor = document.getElementById('theme-color-meta');
-      const color = isDark ? '#0f172a' : '#ffffff';
-      document.documentElement.style.backgroundColor = color;
-      if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', color);
-      }
-    }
-
     // Initialize theme
     function initTheme() {
       const savedTheme = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
       
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      if (isDark) {
         body.classList.add('dark');
         themeToggle.innerHTML = '<span aria-hidden="true">☀️</span>';
-        updateThemeColor(true);
       } else {
         themeToggle.innerHTML = '<span aria-hidden="true">🌙</span>';
-        updateThemeColor(false);
       }
+      updateThemeColor(isDark);
     }
 
     themeToggle.addEventListener('click', () => {
