@@ -817,7 +817,7 @@
           </div>
         </div>
         <div class="hero-image">
-          <img src="673a67c3-534f-4ef7-aa3b-622e6ddc552c.jpg" alt="Brama przemysłowa w oświetleniu nocnym" class="hero-slide active" loading="eager">
+          <img src="673a67c3-534f-4ef7-aa3b-622e6ddc552c.jpg" alt="Brama przemysłowa w oświetleniu nocnym" class="hero-slide" loading="eager">
           <img src="147a3efe-afac-406f-b259-bf5e0472732e.jpg" alt="Biały garaż wolnostojący z ciemną bramą segmentową i drzwiami bocznymi" class="hero-slide" loading="lazy">          
           <img src="7970de23-2ab2-44de-a91d-23bf72bdb0b4.jpg" alt="Nowoczesna czarna brama garażowa z oknami w białym garażu" class="hero-slide" loading="lazy">
           <img src="a005f796-6eee-47e4-a7c4-bc9871aacb10.jpg" alt="Hala przemysłowa z dwiema dużymi bramami" class="hero-slide" loading="lazy">
@@ -1363,10 +1363,18 @@
       });
     });
 
-    // Hero Slide Show
+    // Hero Slide Show - Zmodyfikowany z losowaniem pierwszego zdjęcia
     const heroSlides = document.querySelectorAll('.hero-slide');
     if (heroSlides.length > 0) {
-      let currentHeroSlideIndex = 0;
+      // Usunięcie klasy 'active' na wszelki wypadek (jeśli była dopisana w HTML)
+      heroSlides.forEach(slide => slide.classList.remove('active'));
+
+      // Losowanie numeru początkowego slajdu
+      let currentHeroSlideIndex = Math.floor(Math.random() * heroSlides.length);
+      
+      // Natychmiastowe pokazanie wylosowanego slajdu
+      heroSlides[currentHeroSlideIndex].classList.add('active');
+
       const slideChangeInterval = 4000;
 
       function changeHeroSlide() {
